@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+.venv/
+env/
+
+# HuggingFace / modelos
+models/
+*.bin
+*.safetensors
+
+# Chroma
+chroma_db/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/

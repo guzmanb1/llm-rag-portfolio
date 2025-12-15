@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Chat RAG Demo</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+
+<div class="container">
+    <h1>Chat RAG Demo</h1>
+
+    <textarea id="question" placeholder="Escribe tu pregunta..."></textarea>
+
+    <button onclick="sendQuestion()">Enviar</button>
+
+    <div id="response"></div>
+</div>
+
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+</html>
