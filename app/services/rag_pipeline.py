@@ -1,10 +1,10 @@
 from langchain.chains import RetrievalQA
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_text_splitters import RecursiveCharacterTextSplitter
+from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
 
 import logging
-from .llm_client import embeddings,model
+from .llm_client import emb,model
 
 chat_history = []
 
@@ -17,7 +17,7 @@ def process_file(file_path):
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     splits = text_splitter.split_documents(docs)
 
-    vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings)
+    vectorstore = Chroma.from_documents(documents=splits, embedding=emb)
 
     retriever = vectorstore.as_retriever()
 

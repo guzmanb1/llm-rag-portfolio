@@ -1,0 +1,22 @@
+# Backend
+flask==3.1.0
+python-dotenv==1.0.0
+
+# LLM
+torch==2.0.1
+sentence-transformers==2.2.2
+InstructorEmbedding==1.0.0
+pydantic==2.10.1
+huggingface-hub==0.16.4
+
+# Vector DB
+chromadb==0.4.24 
+pypdf==5.2.0
+
+# LangChain 
+langchain-ibm==0.3.4
+langchain==0.3.7
+
+# Core utils
+numpy==1.24.4
+tqdm==4.66.1
