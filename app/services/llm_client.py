@@ -7,13 +7,11 @@ from langchain_huggingface import HuggingFacePipeline
 
 def init_llm():
     tokenizer = AutoTokenizer.from_pretrained(
-        "microsoft/Phi-3-mini-4k-instruct",
-        trust_remote_code=True
+        "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
     )
     model = AutoModelForCausalLM.from_pretrained(
-        "microsoft/Phi-3-mini-4k-instruct",
-        device_map = "auto",
-        trust_remote_code=True
+        "TinyLlama/TinyLlama-1.1B-Chat-v1.0",
+        device_map = "auto"
     )   
     
     pipe = pipeline(
@@ -21,6 +19,8 @@ def init_llm():
         model=model,
         tokenizer=tokenizer,
         max_new_tokens=512,
+        temperature=0.2,
+        do_sample=True
     )
     llm = HuggingFacePipeline(pipeline = pipe)
     logging.debug("Modelo inicializado")

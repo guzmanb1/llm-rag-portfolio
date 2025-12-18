@@ -46,5 +46,6 @@ def ask_question():
     question = request.json['question']
     print(question)
     answer = answer_question(question)
+    print(answer)
 
-    return jsonify({"message": "answer"})
+    return jsonify({"answer" : answer})
