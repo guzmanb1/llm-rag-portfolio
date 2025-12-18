@@ -49,3 +49,15 @@ button:hover {
     border-radius: 8px;
     min-height: 50px;
 }
+
+#upload-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    border: 2px dashed #4a7dfc;
+    border-radius: 8px;
+    text-align: center;
+}
+
+#upload-section input {
+    margin-bottom: 10px;
+}

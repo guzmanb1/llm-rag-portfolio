@@ -1,20 +1,36 @@
 # Load model directly
-from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import pipeline, AutoTokenizer, AutoModelForCausalLM
 import logging
-from langchain_community.embeddings import HuggingFaceInstructEmbeddings
+from langchain_huggingface.embeddings import HuggingFaceEmbeddings
 import torch
-
-emb = None
-model = None
+from langchain_huggingface import HuggingFacePipeline
 
 def init_llm():
-    global model, emb
-    
-    model = AutoTokenizer.from_pretrained(
+    tokenizer = AutoTokenizer.from_pretrained(
         "microsoft/Phi-3-mini-4k-instruct",
         trust_remote_code=True
     )
+    model = AutoModelForCausalLM.from_pretrained(
+        "microsoft/Phi-3-mini-4k-instruct",
+        device_map = "auto",
+        trust_remote_code=True
+    )   
+    
+    pipe = pipeline(
+        "text-generation",
+        model=model,
+        tokenizer=tokenizer,
+        max_new_tokens=512,
+    )
+    llm = HuggingFacePipeline(pipeline = pipe)
     logging.debug("Modelo inicializado")
-    emb = HuggingFaceInstructEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
+
+    return llm
+
+def init_embeddings():
+    emb = HuggingFaceEmbeddings(
+        model_name="sentence-transformers/all-MiniLM-L6-v2"
+    )
     logging.debug("Embeddings inicializados")
 
+    return emb
