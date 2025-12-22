@@ -20,7 +20,9 @@ def init_llm():
         tokenizer=tokenizer,
         max_new_tokens=512,
         temperature=0.2,
-        do_sample=True
+        do_sample=True,
+        return_full_text=False,
+        clean_up_tokenization_spaces=True
     )
     llm = HuggingFacePipeline(pipeline = pipe)
     logging.debug("Modelo inicializado")

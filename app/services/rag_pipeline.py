@@ -33,6 +33,9 @@ Answer:
 def process_file(file_path):
     global qa_chain
 
+    qa_chain = None
+    vectorstore = None
+
     loader = PyPDFLoader(file_path)
     docs = loader.load()
 
