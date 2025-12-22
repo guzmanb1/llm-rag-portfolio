@@ -44,7 +44,7 @@ def process_file(file_path):
 
     vectorstore = Chroma.from_documents(documents=splits, embedding = current_app.config["EMBEDDINGS"])
 
-    retriever = vectorstore.as_retriever()
+    retriever = vectorstore.as_retriever(search_kwargs={"k": 3})
 
     qa_chain = RetrievalQA.from_chain_type(
         llm=current_app.config["LLM"],
