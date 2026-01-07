@@ -9,6 +9,8 @@ class config:
     #Dejamos el debug activado por defecto porque solo vamos a tener un entorno
     DEBUG = True
 
+    QA_CHAIN = None
+
     UPLOAD_FOLDER = os.path.join(BASE_DIR, "uploads")
     MAX_CONTENT_LENGTH = 10 * 1024 * 1024  # 10 MB
     ALLOWED_EXTENSIONS = {"pdf"}

@@ -8,15 +8,17 @@ from langchain.prompts import PromptTemplate
 from flask import current_app
 import logging
 
-chat_history = []
 
 custom_prompt = PromptTemplate(
     input_variables=["context", "question"],
     template="""
-You are an AI assistant.
+You are an AI assistant that receives documents as context and responds based on them.
 
-Answer the user's question using ONLY the information provided in the context below.
-If the answer cannot be found in the context, say exactly:
+Limit yourself to answering only what you are asked, no more and no less.
+
+Use ONLY the information in the context below.
+Do NOT use prior knowledge.
+If the answer is not in the context, reply exactly:
 "I don't know based on the document."
 
 Context:
@@ -31,11 +33,6 @@ Answer:
 
 
 def process_file(file_path):
-    global qa_chain
-
-    qa_chain = None
-    vectorstore = None
-
     loader = PyPDFLoader(file_path)
     docs = loader.load()
 
@@ -53,8 +50,10 @@ def process_file(file_path):
         chain_type_kwargs={"prompt": custom_prompt}
     )
 
+    current_app.config["QA_CHAIN"] = qa_chain
+
 def answer_question(question):
-    global qa_chain
+    qa_chain = current_app.config.get("QA_CHAIN")
 
     output = qa_chain.invoke({"query": question})
     answer = output["result"]
